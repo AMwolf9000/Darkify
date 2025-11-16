@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Darkify",
+  "description": "low-effort dark mode",
+  "version": "1.1",
+  
+  "permissions": [
+    "scripting",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  
+  "action": {
+	"default_title": "Run"
+  }
+}

@@ -11,15 +11,14 @@ console.log("Loaded: " + activeIds.toString());
 	}
 }
 
-function save() { // save data on change
-	let obj = {};
-	for (const id of activeIds) {
-		console.log(id)
-		obj[id] = null;
+function save(id, operation) { // save data on change
+	if (operation == "s") {
+		SS.set({[id]: null});
+		console.log("Saved: " + id)
+	} else if (operation == "r") {
+		SS.remove(id.toString());
+		console.log("Removed: " + id);
 	}
-	SS.clear();
-	SS.set(obj);
-	console.log("Saved: " + Object.keys(obj).toString());
 }
 
 function run(id) {
@@ -34,18 +33,19 @@ chrome.action.onClicked.addListener((tab) => {
 	if (i == -1) {
 		activeIds.push(tab.id);
 		run(tab.id);
+		save(tab.id, "s");
 	} else {
 		activeIds.splice(i, 1);
+		save(tab.id, "r");
 	}
-	save();
 });
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo) => {
 	const i = activeIds.indexOf(tabId)
 	if (i != -1) {
 		activeIds.splice(i, 1);
+		save(tabId, "r")
 	}
-	save()
 });
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {

@@ -1,6 +1,5 @@
 /* TODO:
     go into shadow roots/iframes
-    ::before & ::after ??
 */
 (async () => {
 // add style sheet before waiting for DOM to prevent white flash from loading

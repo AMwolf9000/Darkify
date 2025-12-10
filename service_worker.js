@@ -6,7 +6,7 @@ console.log("Loaded: " + activeIds.toString());
 // check lastFocusedPage on startup
 {
 	const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-	if (activeIds.indexOf(tab.id) != -1) {
+	if (tab != undefined && activeIds.indexOf(tab.id) != -1) {
 		run(tab.id)
 	}
 }
